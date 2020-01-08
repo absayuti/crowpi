@@ -1,0 +1,41 @@
+PIN#	GPIO	BUTTON	  OTHERS
+1	3v3	
+2	Vcc
+3	SDA
+4	Vcc
+5	SCL
+6	Gnd
+7			  Gas sensor
+8	Rx
+9	Gnd
+10	Tx
+11			  Touch sensor
+12			  Buzzer
+13		Row1	  Vibration
+14	Gnd
+15		Row2	  Tile sensor
+16			  Motion sensor
+17	3v3
+18			  Sound sensor
+19	MOSI
+20	Gnd
+21	MISO
+22		Lt/Col1	  Servo2
+23	SCLK
+24	CE0
+25	Gnd
+26	CE
+27	ID_SD
+28	ID_SC
+29		Row3	  Stepper1
+30	Gnd
+31		Row4	  Stepper2
+32			  Usonic Echo
+33		Dn/Col4	  Stepper3
+34	Gnd
+35		Rt/Col3	  Stepper4
+36			  Usonic Trig
+37		Up/Col2	  Servo1
+38			  IR sensor
+39	Gnd
+40			  Relay
