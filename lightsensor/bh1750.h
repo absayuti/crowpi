@@ -2,10 +2,6 @@
     bh1750.h
 	Include file for BH1750 light sensor module connected via I2C
 
-	References	: 	Various sources, including:
-				http://raspberrypi.link-tech.de/doku.php?id=bh1750
-				https://components101.com/sites/default/files/component_datasheet/BH1750.pdf
-
 ***********************************************************************/
 
 #include <stdio.h>
@@ -15,10 +11,9 @@
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 
+// BH1750 parameters
 
-// ******************* BH1750 parameters start here ***************
-
-#define BH1750_DEVICE 		    0x5C 	// Light sensor devID on I2C bus
+#define BH1750_DEVICE 		    	0x5C 	// Light sensor devID on I2C bus
 											// Use $ gpio i2detect to get devID
 #define BH1750_POWER_DOWN           0x00	// No active state
 #define BH1750_POWER_ON             0x01	// Waiting for measurement command
@@ -32,6 +27,11 @@
 #define ONE_TIME_HIGH_RES_MODE_2    0x21	// Measurement at 0.5 lux resolution. Measurement time is approx 120ms.
 #define ONE_TIME_LOW_RES_MODE       0x23	// Measurement at 4 lux resolution. Measurement time is approx 16ms.
 
+#define LUX_CALIBRATION             0.3		// Lux value is affected by this constant
+											// BH1750 datasheet uses 1/1.2 = 0.83333333
+											// 0.3 seems to give a better lux value
+
+// Function: Initialize BH1750 and return file number fd
 
 int init_bh1750()
 {
@@ -50,14 +50,16 @@ int init_bh1750()
 	return fd;
 }
 
+// Function: Read data from light sensor, compute and return lux value
 
 int read_bh1750( int fd )
 {
 	int data, val, lux;
 
-	data = wiringPiI2CReadReg16( fd, 'L' );			// ADDR = 'L' according to BH1750 datasheet
-	val = ((data & 0xFF00)>>8) | ((data & 0x00FF)<<8);	// Data received in Little-Endian format
-	lux = (int)(val/3);					// This seems to give more accurate lux value
-									// BH1750 datasheet uses: val/1.2
+	data = wiringPiI2CReadReg16( fd, 'L' );		// ADDR = 'L' according to BH1750 datasheet
+												// Data received in Little-Endian format
+	val = ((data & 0xFF00)>>8) | ((data & 0x00FF)<<8);	
+	lux = (int)(val*LUX_CALIBRATION);
+	
 	return lux;
 }

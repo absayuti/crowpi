@@ -12,7 +12,6 @@
 	Requires:
 		libi2c-dev : $ sudo apt-get install libi2c-dev
 		7seg_bp_ada.c library
-		( https://dino.ciuffetti.info/2014/04/adafruit-4-digit-7-segment-backpack-raspberry-pi-in-c/ )
 
 	Compile with:
 		gcc 7seg_bp_ada_test.c 7seg_bp_ada.c

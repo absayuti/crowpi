@@ -1,21 +1,8 @@
-/*****************************************************************************
-	CrowPi 7-segment display test program
-
-	Requires:
-		libi2c-dev : $ sudo apt-get install libi2c-dev
-		7seg_bp_ada.c library
-
-	Compile with:
-		gcc 7seg_bp_ada_test.c 7seg_bp_ada.c
-******************************************************************************/
-
 #include <stdio.h>
 #include <string.h>
 #include "7seg_bp_ada.h"
 
-
-int main() 
-{
+int main() {
 	int rc;
 	// prepare the backpack driver
         // (the first parameter is the raspberry pi i2c master controller attached to the HT16K33, the second is the i2c selection jumper)
@@ -51,25 +38,25 @@ int main()
 	HT16K33_DISPLAY(&led_backpack1, HT16K33_DISPLAY_ON);
 	
 	// use a commodity macro defined in 7seg_bp_ada.h to say "HELLO" on the display
-	//HT16K33_SAY_HELLO(&led_backpack1);
+	HT16K33_SAY_HELLO(&led_backpack1);
 	
-
-	HT16K33_UPDATE_DIGIT(&led_backpack1, 0, '1', 0);
-	HT16K33_UPDATE_DIGIT(&led_backpack1, 1, '2', 0);
-	HT16K33_UPDATE_DIGIT(&led_backpack1, 2, HT16K33_COLON_ON, 0);
-	HT16K33_UPDATE_DIGIT(&led_backpack1, 3, '3', 0);
-	HT16K33_UPDATE_DIGIT(&led_backpack1, 4, '4', 0);
+	/*
+	HT16K33_UPDATE_DIGIT(&led_backpack1, 0, 'H', 0);
+	HT16K33_UPDATE_DIGIT(&led_backpack1, 1, 'E', 0);
+	HT16K33_UPDATE_DIGIT(&led_backpack1, 2, HT16K33_COLON_OFF, 0);
+	HT16K33_UPDATE_DIGIT(&led_backpack1, 3, '#', 0);
+	HT16K33_UPDATE_DIGIT(&led_backpack1, 4, 'o', 0);
 	HT16K33_COMMIT(&led_backpack1);
+	*/
 	
-	
-	
-	//HT16K33_SAY_NO(&led_backpack1);
-	//HT16K33_SAY_YES(&led_backpack1);
-	//HT16K33_SAY_PLAY(&led_backpack1);
-	//HT16K33_SAY_HELP(&led_backpack1);
-	//HT16K33_SAY_YOU(&led_backpack1);
-	//HT16K33_SAY_COOL(&led_backpack1);
-	
+	/*
+	HT16K33_SAY_NO(&led_backpack1);
+	HT16K33_SAY_YES(&led_backpack1);
+	HT16K33_SAY_PLAY(&led_backpack1);
+	HT16K33_SAY_HELP(&led_backpack1);
+	HT16K33_SAY_YOU(&led_backpack1);
+	HT16K33_SAY_COOL(&led_backpack1);
+	*/
 	
 	// if you want to power off the display before exiting uncomment this one
 	//rc = HT16K33_OFF(&led_backpack1);

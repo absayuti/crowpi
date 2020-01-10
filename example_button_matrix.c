@@ -1,11 +1,39 @@
+/*****************************************************************************
+	Program: 	Button matrix
+				This example program shows the use of the button matrix on 
+				CrowPi.
+				
+	Hardware:	CrowPi (with Raspberry Pi 3B+)
+				CrowPi's built-in button matrix
+				Monitor
+
+	Software:	Raspbian system with WiringPi library
+				
+	Others:		Compile with:
+				$ gcc -o example example_button_matrix.c -lwiringPi -Wall
+		
+				Run with:
+				$ ./example
+						
+				Jan 2020
+				
+******************************************************************************/
+
 #include <stdio.h>
 #include <wiringPi.h>
 
-
+// Function prototypes
 int setup_button_matrix();
 int get_button_matrix();
 
+// Button matrix configuration for key numbers
+int BMrow[] = { 13, 15, 29, 31 };		// Pin #s for the rows
+int BMcol[] = { 22, 37, 35, 33 };		// Pin #s for the columns
 
+
+// ---------------------------------------------------------------------------
+// Main function
+//
 int main( int argc, char **argv )
 {
 	int k;
@@ -25,42 +53,44 @@ int main( int argc, char **argv )
 }
 
 
+// ---------------------------------------------------------------------------
+// Function: to setup button matrix
+//
 int setup_button_matrix()
 {
-	int row[] = { 13, 15, 29, 31 };		// Pin #s for the rows
-	int col[] = { 22, 37, 35, 33 };		// Pin #s for the columns
 	int r, c;
 
 	// Setup GPIO
 	wiringPiSetupPhys();
 	for( c=0; c < 4; c++ ) {
-		pinMode( col[c], OUTPUT );
-		digitalWrite( col[c], HIGH );
+		pinMode( BMcol[c], OUTPUT );
+		digitalWrite( BMcol[c], HIGH );
 	}
 	for( r=0; r < 4; r++ ) {
-		pinMode( row[r], PUD_UP );
-		pullUpDnControl( row[r], PUD_UP );
+		pinMode( BMrow[r], PUD_UP );
+		pullUpDnControl( BMrow[r], PUD_UP );
 	}
 	return 0;
 }
 
 
+// ---------------------------------------------------------------------------
+// Function: Read button matrix and return corresponding key number
+//
 int get_button_matrix()
 {
-	int row[] = { 13, 15, 29, 31 };		// Pin #s for the rows
-	int col[] = { 22, 37, 35, 33 };		// Pin #s for the columns
 	int r, c, key;
 
 	for( c=0; c < 4; c++ ) {
-		digitalWrite( col[c], LOW );
+		digitalWrite( BMcol[c], LOW );
 		for( r=0; r < 4; r++ ) {
-			if( !digitalRead(row[r]) ) {
+			if( !digitalRead(BMrow[r]) ) {
 				key = r*4 + c + 1;
 				delay(50);
 				return key;
 			}
 		}
-		digitalWrite( col[c], HIGH );
+		digitalWrite( BMcol[c], HIGH );
 	}
 	return 0;
 }
