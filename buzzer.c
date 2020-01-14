@@ -1,22 +1,19 @@
+// Program: Buzzer -- Switch on buzzer for 0.5 second
 #include <stdio.h>
 #include <wiringPi.h>
 
-const int buzzer_pin = 12;
-
+#define BUZZER  12
 
 int main()
 {
+	// Setup
 	wiringPiSetupPhys();
-	
-	pinMode(buzzer_pin, OUTPUT);
+	pinMode(BUZZER, OUTPUT);
 
-	printf("BUZZ!!!");
-	
-	digitalWrite(0, HIGH);
-	digitalWrite(buzzer_pin, HIGH);
+	printf("BUZZ!!!\n");
+	digitalWrite(BUZZER, HIGH);
 	delay(500);
-	digitalWrite(buzzer_pin, LOW);
-	digitalWrite(0, LOW);
+	digitalWrite(BUZZER, LOW);
 	
 	return 0;
 }

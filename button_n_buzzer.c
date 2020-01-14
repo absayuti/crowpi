@@ -1,33 +1,44 @@
 /**********************************************************************
- Buzzer controlled by button
- 
- Hardware	:	CrowPi, Raspberry Pi 3B
-				Input switches: #7 ON
- Software	:	Raspbian, WiringPi
- 	
+	Program: 	Button and buzzer
+				This example program shows the use of a button to
+				control the buzzer
+				
+	Hardware:	CrowPi (with Raspberry Pi 3B+)
+
+	Software:	Raspbian system with WiringPi library
+				
+	Compile:	$ gcc -o example button_n_buzzer.c -lwiringPi -Wall
+		
+	Run with:	$ ./example
+						
+	Jan 2020
 ***********************************************************************/
 
 #include <stdio.h>
 #include <wiringPi.h>
 
-const int button_pin = 37;
-const int buzzer_pin = 12;
-
+#define  BUTTON  37
+#define  BUZZER  12
 
 int main()
 {
-	// Setup pin modes
+	// Setup WiringPi and pin modes
 	wiringPiSetupPhys();	
-	pinMode(button_pin, INPUT);
-	pinMode(buzzer_pin, OUTPUT);
+	pinMode(BUTTON, INPUT);
+	pinMode(BUZZER, OUTPUT);
 	
+	// Print instruction
+	printf("\nSwitch ON #7 @ LEFT selection switches.\n");
+	printf("Press the UP button to switch on buzzer.\n");
+	printf("Press Ctrl-C to EXIT.\n");
+	
+	// Main loop
 	while(1) {
-		if( !digitalRead(button_pin) ) {
-			printf("BUZZ!!!");
-			digitalWrite(buzzer_pin, HIGH);
+		if( !digitalRead(BUTTON) ) {
+			digitalWrite(BUZZER, HIGH);
 		}
 		else {
-			digitalWrite(buzzer_pin, LOW);
+			digitalWrite(BUZZER, LOW);
 		}
 	}
 	

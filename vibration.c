@@ -1,45 +1,51 @@
-/**********************************************************************
- Vibration controlled by buttons
- 
- Hardware	:	CrowPi, Raspberry Pi 3B
-				Input switches: #7 ON
-				Output switches: #1 ON
- Software	:	Raspbian, WiringPi
- 	
-***********************************************************************/
+/******************************************************************************
+	Program: 	Vibration
+				This example program shows the use of a button to control
+				vibration module and another button to control buzzer.
+				
+	Hardware:	CrowPi (with Raspberry Pi 3B+)
+				Selection switches LEFT: 5, 7; RIGHT: 1 
+	Software:	Raspbian system with WiringPi library
+	Compile:	$ gcc -o vibration vibration.c -lwiringPi -Wall
+	Run with:	$ ./vibration
+						
+	Jan 2020	
+******************************************************************************/
 
 #include <stdio.h>
 #include <wiringPi.h>
 
-const int button1_pin = 37;
-const int button2_pin = 33;
-const int buzzer_pin = 12;
-const int vibrat_pin = 13;
+#define BUTTON_UP   37
+#define BUTTON_DN   33
+#define BUZZER      12
+#define VIBRATION   13
 
 
 int main()
 {
-	// Setup pin modes
+	// Setup
 	wiringPiSetupPhys();	
-	pinMode(button1_pin, INPUT);
-	pinMode(button2_pin, INPUT);
-	pinMode(buzzer_pin, OUTPUT);
-	pinMode(vibrat_pin, OUTPUT);
+	pinMode(BUTTON_UP, INPUT);
+	pinMode(BUTTON_DN, INPUT);
+	pinMode(BUZZER, OUTPUT);
+	pinMode(VIBRATION, OUTPUT);
 
 	// Instruction
+	printf("\nSwitch ON selection switches: LEFT: #5 & #7,  RIGHT: #1\n"); 
 	printf("Press BUTTON UP to beep, BUTTON DOWN to vibrate\n");
-	printf("Press CTRL-C to end\n");
+	printf("Press CTRL-C to END program.\n");
 	
+	// Main loop
 	while(1) {
-		if( !digitalRead(button1_pin) ) {
-			digitalWrite(buzzer_pin, HIGH);
+		if( !digitalRead(BUTTON_UP) ) {
+			digitalWrite(BUZZER, HIGH);
 		}
-		else if( !digitalRead(button2_pin) ) {
-			digitalWrite(vibrat_pin, HIGH);
+		else if( !digitalRead(BUTTON_DN) ) {
+			digitalWrite(VIBRATION, HIGH);
 		}
 		else {
-			digitalWrite(buzzer_pin, LOW);
-			digitalWrite(vibrat_pin, LOW);
+			digitalWrite(BUZZER, LOW);
+			digitalWrite(VIBRATION, LOW);
 		}
 	}
 	

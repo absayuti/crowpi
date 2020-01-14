@@ -1,44 +1,44 @@
-/**********************************************************************
- Using sound sensor to detect hand clap
- 
- Hardware	:	CrowPi, Raspberry Pi 3B
- Software	:	Raspbian, WiringPi
-
- Compilation	:	gcc sound_sensor.c -l wiringPi 	
-***********************************************************************/
+/******************************************************************************
+	Program: 	Sound sensor
+				This example program shows the use of sound sensor to detect
+				hand clap or finger snap.
+				
+	Hardware:	CrowPi (with Raspberry Pi 3B+)
+	Software:	Raspbian system with WiringPi library
+	Compile:	$ gcc -o sound sound_sensor.c -lwiringPi -Wall
+	Run with:	$ ./sound
+						
+	Jan 2020	
+******************************************************************************/
 
 #include <stdio.h>
-#include <unistd.h>
 #include <wiringPi.h>
 
-const int sound_pin   = 18;
-const int led_pin     = 22;	
-//const int button1_pin = 37;
-//const int button2_pin = 33;
-//const int buzzer_pin  = 12;
-//const int vibrat_pin  = 13;
+#define  SOUNDSENSOR    18
+#define  LED22          22
 
 
 int main()
 {
-	// Setup pin modes
+	// Setup
 	wiringPiSetupPhys();
-	pinMode(sound_pin, INPUT);
-	pullUpDnControl(sound_pin, PUD_UP);
-	pinMode(led_pin, OUTPUT);
+	pinMode(SOUNDSENSOR, INPUT);
+	pullUpDnControl(SOUNDSENSOR, PUD_UP);
+	pinMode(LED22, OUTPUT);
 
 	// Instruction
 	printf("Clap your hands near the sound sensor\n");
 	printf("Press CTRL-C to end\n");
 	
+	// Main loop
 	while(1) {
-		if( digitalRead(sound_pin) ) {
+		if( digitalRead(SOUNDSENSOR) ) {
 			printf("Sound detected\n");
-			digitalWrite(led_pin, HIGH);
-			sleep(1);
+			digitalWrite(LED22, LOW);
+			delay(500);	
 		}
 		else {
-			digitalWrite(led_pin, LOW);
+			digitalWrite(LED22, HIGH);
 		}
 	}
 	

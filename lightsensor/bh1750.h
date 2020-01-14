@@ -17,16 +17,22 @@
 											// Use $ gpio i2detect to get devID
 #define BH1750_POWER_DOWN           0x00	// No active state
 #define BH1750_POWER_ON             0x01	// Waiting for measurement command
-#define BH1750_RESET                0x07	// Reset data register value - not accepted in POWER_DOWN mode
+#define BH1750_RESET                0x07	// Reset data register value
+											// - not accepted in POWER_DOWN mode
 #define BH1750_DEFAULT_MTREG          69	// Default MTreg value
 #define UNCONFIGURED                   0
-#define CONTINUOUS_HIGH_RES_MODE    0x10	// Measurement at 1 lux resolution. Measurement time is approx 120ms.
-#define CONTINUOUS_HIGH_RES_MODE_2  0x11	// Measurement at 0.5 lux resolution. Measurement time is approx 120ms.
-#define CONTINUOUS_LOW_RES_MODE     0x13	// Measurement at 4 lux resolution. Measurement time is approx 16ms.
-#define ONE_TIME_HIGH_RES_MODE	    0x20	// Measurement at 1 lux resolution. Measurement time is approx 120ms.
-#define ONE_TIME_HIGH_RES_MODE_2    0x21	// Measurement at 0.5 lux resolution. Measurement time is approx 120ms.
-#define ONE_TIME_LOW_RES_MODE       0x23	// Measurement at 4 lux resolution. Measurement time is approx 16ms.
-
+#define CONTINUOUS_HIGH_RES_MODE    0x10	// Measurement at 1 lux resolution. 
+											// Measurement time is approx 120ms.
+#define CONTINUOUS_HIGH_RES_MODE_2  0x11	// Measurement at 0.5 lux resolution. 
+											// Measurement time is approx 120ms.
+#define CONTINUOUS_LOW_RES_MODE     0x13	// Measurement at 4 lux resolution. 
+											// Measurement time is approx 16ms.
+#define ONE_TIME_HIGH_RES_MODE	    0x20	// Measurement at 1 lux resolution. 
+											// Measurement time is approx 120ms.
+#define ONE_TIME_HIGH_RES_MODE_2    0x21	// Measurement at 0.5 lux resolution. 
+											// Measurement time is approx 120ms.
+#define ONE_TIME_LOW_RES_MODE       0x23	// Measurement at 4 lux resolution. 
+											// Measurement time is approx 16ms.
 #define LUX_CALIBRATION             0.3		// Lux value is affected by this constant
 											// BH1750 datasheet uses 1/1.2 = 0.83333333
 											// 0.3 seems to give a better lux value
