@@ -56,19 +56,19 @@ int get_distance( int unit )
 {
 	int  pulse_start, pulse_end;
 
-	digitalWrite(TRIG, LOW);
+	digitalWrite(TRIG, LOW);					// Reset TRIG pulse
 	delay(1);
-	digitalWrite(TRIG, HIGH);
-	delayMicroseconds(10);
+	digitalWrite(TRIG, HIGH);					// Start TRIG pulse
+	delayMicroseconds(10);						// .. for 10 us
 	digitalWrite(TRIG, LOW);
 	
-	while( !digitalRead(ECHO) )
-		pulse_start = micros();
+	while( !digitalRead(ECHO) )					// Wait for start of ECHO pulse
+		pulse_start = micros();					// Record start time
 	
-	while( digitalRead(ECHO) )
-		pulse_end = micros();
+	while( digitalRead(ECHO) )					// Wait until ECHO pulse ends
+		pulse_end = micros();					// Record end time
 	
-	if( unit == CM )
+	if( unit == CM )							// Convert to distance CM/INCH
 		return 0.5 * (pulse_end - pulse_start) / 29.1;
 	else
 		return 0.5 * (pulse_end - pulse_start) / 74;
