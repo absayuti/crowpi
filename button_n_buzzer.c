@@ -34,11 +34,11 @@ int main()
 	
 	// Main loop
 	while(1) {
-		if( !digitalRead(BUTTON) ) {
-			digitalWrite(BUZZER, HIGH);
+		if( !digitalRead(BUTTON) ) {		// If button is pressed..
+			digitalWrite(BUZZER, HIGH);		// ..switch ON buzzer
 		}
-		else {
-			digitalWrite(BUZZER, LOW);
+		else {								// Otherwise..
+			digitalWrite(BUZZER, LOW);		// ..switch OFF buzzer
 		}
 	}
 	
